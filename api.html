@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+Template Name: Big Data
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Big Data | </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,b{
+color:#59A209
+}
+.container{
+text-align:justify;
+padding:0px 0px 0px;
+margin-bottom:0px;
+
+}
+
+</style>
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+ <header id="header" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="fl_left">
+      <h1><a href="#">Gloria</a></h1>
+    </div>
+    <nav id="mainav" class="fl_right">
+      <ul class="clear">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a class="drop" href="more_ransomware.html">Hacking And Ethics</a>
+          
+        </li>
+		 <li><a class="drop" href="big_data.html"> Big Data</a>
+          
+        </li>
+        <li><a class="drop" href="api.html">API Endpoint</a>
+          
+        </li>
+		<li><a class="drop" href="cloud.html">Cloud computing</a>
+          
+        </li><li><a class="drop" href="iot.html">Mobile computing</a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    <!-- ################################################################################################ -->
+  </header>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+  <div id="breadcrumb" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+   Muhoza B. Gloria, July 2017
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <div class="content"> 
+      <!-- ################################################################################################ -->
+     <br>
+	 <br>  
+<h1>Designing an API endpoint for UTAMU.</h1>
+<p>APIs are application programming Interfaces, endpoint through which software communicate. The keys to designing a successful web endpoint for UTAMU API are simplicity and consistency. A Web API that exhibits these two factors makes it easier to build client applications that need to consume the API.
+
+</p><p>In this article I focus on building A RESTful web API endpoint for UTAMU students to access and query their marks using their client programs. so that is focused on exposing a set of connected resources, and providing the core operations that enable an application to manipulate these resources and easily navigate between them. For this reason, the URIs that constitute a typical RESTful web API should be oriented towards the data that it exposes, and use the facilities provided by HTTP to operate on this data.
+
+ </p><p>This approach requires a different mindset from that typically employed when designing a set of classes in an object-oriented API which tends to be more motivated by the behavior of objects and classes. Additionally, a RESTful web API should be stateless and not depend on operations being invoked in a particular sequence. The following sections summarize the points I should consider for this given API.
+<h4>The web API around resources</h4>
+<ol><li><p>As appoint to note: The URIs exposed by a REST web service should be based on nouns (the data to which the web API provides access) and not verbs (what an application can do with the data).
+</p></li>
+<li>Avoid designing a REST interface that mirrors or depends on the internal structure of the data that it exposes. REST is about more than implementing simple CRUD (Create, Retrieve, Update, Delete) operations over separate tables in a relational database. The purpose of REST is to map business entities and the operations that an application can perform on these entities to the physical implementation of these entities, but a client should not be exposed to these physical details.
+</p></li>
+<li>Adopt a consistent naming convention in URIs; in general, it helps to use plural nouns for URIs that reference collections.
+
+</p></li>
+<li>Avoid requiring resource URIs more complex than collection/item/collection.
+</p></li>
+<li>The source of the data that underpins a web API does not have to be a data store; it could be another service or line-of-business application or even a legacy application running on-premises within an organization.
+</p></li>
+<li>Finally, it might not be possible to map every operation implemented by a web API to a specific resource. You can handle such non-resource scenarios through HTTP GET requests that invoke a piece of functionality and return the results as an HTTP response message. A web API that implements simple calculator-style operations such as add and subtract could provide URIs that expose these operations as pseudo resources and utilize the query string to specify the parameters required. For example a GET request to the URI /add?coursework=40&exam=30 could return a response message with the body containing the value 70, and GET request to the URI /computegp?marks=70 could return a response message with the body containing the value 4.0. However, only use these forms of URIs sparingly.
+</p></li>
+<h4>Defining operations in terms of HTTP methods</h4>
+<p>The HTTP protocol defines a number of methods that assign semantic meaning to a request. The common HTTP methods used by most RESTful web APIs are:<br>
+         <b>GET</b>, to retrieve a copy of the resource at the specified URI. The body of the response message contains the details of the requested resource.<br>
+         <b>POST</b>, to create a new resource at the specified URI. The body of the request message provides the details of the new resource. Note that POST can also be used to trigger operations that don't actually create resources.<br>
+        <b>PUT</b>, to replace or update the resource at the specified URI. The body of the request message specifies the resource to be modified and the values to be applied.<br>
+         <b>DELETE</b>, to remove the resource at the specified URI.<br>
+Note
+The HTTP protocol also defines other less commonly-used methods, such as PATCH which is used to request selective updates to a resource, HEAD which is used to request a description of a resource, OPTIONS which enables a client information to obtain information about the communication options supported by the server, and TRACE which allows a client to request information that it can use for testing and diagnostics purposes.
+
+<table><tr><td>Resour</td><td>ce	POST</td><td>	GET</td><td>	PUT</td><td>	DELETE</td></tr>
+<tr><td>/students</td><td>	Create a new student</td><td>	Retrieve all students</td><td>	Bulk update of students (if implemented) </td><td>	Remove all students</td></tr>
+<tr><td>/students/1</td><td>	Error</td><td>	Retrieve the details for student 1</td><td>	Update the details of student 1 if it exists, otherwise return an error</td><td>	Remove student 1</td></tr>
+<tr><td>/students/1/queries</td><td>	Create a new querie for student 1</td><td>	Retrieve all queries for student 1</td><td>	Bulk update of queries for student 1 (if implemented) </td><td>	Remove all queries for student 1(if implemented) </td></tr></table>
+
+<p>The purpose of GET and DELETE requests are relatively straightforward, but there is scope for confusion concerning the purpose and effects of POST and PUT requests.
+</p><p>A POST request should create a new resource with data provided in the body of the request. In the REST model, you frequently apply POST requests to resources that are collections; the new resource is added to the collection.
+
+</p><p>You can also define POST requests that trigger some functionality (and that don't necessarily return data), and these types of request can be applied to collections. For example you could use a POST request to pass a timesheet to a payroll processing service and get the calculated taxes back as a response.
+</p><p>A PUT request is intended to modify an existing resource. If the specified resource does not exist, the PUT request could return an error (in some cases, it might actually create the resource). PUT requests are most frequently applied to resources that are individual items (such as a specific student or querie), although they can be applied to collections, although this is less-commonly implemented. Note that PUT requests are idempotent whereas POST requests are not; if an application submits the same PUT request multiple times the results should always be the same (the same resource will be modified with the same values), but if an application repeats the same POST request the result will be the creation of multiple resources.
+</p><p>Note
+Strictly speaking, an HTTP PUT request replaces an existing resource with the resource specified in the body of the request. If the intention is to modify a selection of properties in a resource but leave other properties unchanged, then this should be implemented by using an HTTP PATCH request. However, many RESTful implementations relax this rule and use PUT for both situations.
+</p><p>
+<h4>Processing HTTP requests</h4>
+<p>The data included by a client application in many HTTP requests, and the corresponding response messages from the web server, could be presented in a variety of formats (or media types). For example, the data that specifies the details for a student or querie could be provided as XML, JSON, or some other encoded and compressed format. A RESTful web API should support different media types as requested by the client application that submits a request.
+
+</p><p>When a client application sends a request that returns data in the body of a message, it can specify the media types it can handle in the Accept header of the request. The following code illustrates an HTTP GET request that retrieves the details of querie 2 and requests the result to be returned as JSON (the client should still examine the media type of the data in the response to verify the format of the data returned):
+GET http://adventure-works.com/queries/2 HTTP/1.1<br>
+...<br>
+Accept: application/json<br>
+...<br>
+</p><p>If the web server supports this media type, it can reply with a response that includes Content-Type header that specifies the format of the data in the body of the message:
+Note<br>
+</p><p>For maximum interoperability, the media types referenced in the Accept and Content-Type headers should be recognized MIME types rather than some custom media type.
+<br>HTTP/1.1 200 OK<br>
+...<br>
+Content-Type: application/json; charset=utf-8<br>
+...<br>
+Date: Fri, 22 July 2017 09:18:37 GMT<br>
+Content-Length: ...<br>
+{"orderID":2,"productID":4,"quantity":2,"orderValue":10.00}<br>
+</p><p>If the web server does not support the requested media type, it can send the data in a different format. IN all cases it must specify the media type (such as application/json) in the Content-Type header. It is the responsibility of the client application to parse the response message and interpret the results in the message body appropriately.
+Note that in this example, the web server successfully retrieves the requested data and indicates success by passing back a status code of 200 in the response header. If no matching data is found, it should instead return a status code of 404 (not found) and the body of the response message can contain additional information. The format of this information is specified by the Content-Type header, as shown in the following example:
+</p>
+GET http://adventure-works.com/queries/222 HTTP/1.1<br>
+...<br>
+Accept: application/json<br>
+...<br>
+querie 222 does not exist, so the response message looks like this:<br>
+HTTP/1.1 404 Not Found<br>
+...<br>
+Content-Type: application/json; charset=utf-8<br>
+...<br>
+Date: Fri, 22 July 2017 09:18:37 GMT<br>
+Content-Length: ...<br>
+{"message":"No such querie"}<br>
+<<p>When an application sends an HTTP PUT request to update a resource, it specifies the URI of the resource and provides the data to be modified in the body of the request message. It should also specify the format of this data by using the Content-Type header. A common format used for text-based information is application/x-www-form-urlencoded, which comprises a set of name/value pairs separated by the & character. The next example shows an HTTP PUT request that modifies the information in querie 1:
+<br>PUT http://adventure-works.com/queries/1 HTTP/1.1<br>
+...<br>
+Content-Type: application/x-www-form-urlencoded<br>
+...<br>
+</p><p>
+<h4>Conclusion</h4>
+If all the resources in a collection need to be deleted, enable an HTTP DELETE request to be specified for the URI of the collection rather than forcing an application to remove each resource in turn from the collection.
+</p>
+
+	
+      </div>
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <nav class="pagination">
+        <ul>
+          <li><a href="#">&laquo; Previous</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><strong>&hellip;</strong></li>
+          <li><a href="#">6</a></li>
+          <li class="current"><strong>7</strong></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li><strong>&hellip;</strong></li>
+          <li><a href="#">14</a></li>
+          <li><a href="#">15</a></li>
+          <li><a href="#">Next &raquo;</a></li>
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2017 - All Rights Reserved - <a href="#">Gloria B Muhoza</a> August 2017</p>
+    
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="jquery.min.js"></script>
+<script src="jquery.backtotop.js"></script>
+<script src="jquery.mobilemenu.js"></script>
+</body>
+</html>
